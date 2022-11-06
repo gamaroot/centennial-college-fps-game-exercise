@@ -3,11 +3,6 @@ using UnityEngine;
 
 public class PlayerShooter : MonoBehaviour
 {
-    [Header("Properties")]
-    [SerializeField] private LayerMask m_enemyLayerMask;
-    [SerializeField] private LayerMask m_hostageLayerMask;
-    [SerializeField] private LayerMask m_medkitLayerMask;
-
     private Ray m_shotRay;
 
     private void Update()
