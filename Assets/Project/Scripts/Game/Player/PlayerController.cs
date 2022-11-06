@@ -5,8 +5,9 @@ using UnityEngine;
 namespace game
 {
     [RequireComponent(typeof(DOTweenPath))]
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : PlayerShooter
     {
+        [Header("Components")]
         [SerializeField] private DOTweenPath tweenPath;
         [SerializeField] private Transform path;
 
