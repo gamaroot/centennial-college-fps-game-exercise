@@ -4,11 +4,12 @@ namespace game
 {
     public class Spawner : MonoBehaviour
     {
-        [SerializeField] private Spawnable m_spawnable;
+        [SerializeField] private Spawnable[] m_spawnables;
 
         private void OnTriggerEnter(Collider other)
         {
-            Transform spawnTransform = Instantiate(this.m_spawnable).transform;
+            Spawnable spawn = this.m_spawnables[Random.Range(0, this.m_spawnables.Length)];
+            Transform spawnTransform = Instantiate(spawn).transform;
             spawnTransform.SetParent(base.transform.parent);
             spawnTransform.position = base.transform.position;
 
