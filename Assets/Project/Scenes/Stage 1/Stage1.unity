@@ -5378,7 +5378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &745886712
 Transform:
   m_ObjectHideFlags: 0
@@ -6440,7 +6440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &899269840
 Transform:
   m_ObjectHideFlags: 0
@@ -15996,6 +15996,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e3f66626acaf74d865b24a83db8396, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_hostageLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  m_medkitLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   tweenPath: {fileID: 1828714640}
   path: {fileID: 755986969}
 --- !u!54 &1828714643
