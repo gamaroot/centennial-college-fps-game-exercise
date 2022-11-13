@@ -1,28 +1,35 @@
-using game;
 using UnityEngine;
 
-public class PlayerShooter : MonoBehaviour
+namespace game
 {
-    private Ray m_shotRay;
-    private AudioSource audioSource;
-
-    public void Awake()
+    [RequireComponent(typeof(AudioSource))]
+    public class PlayerShooter : MonoBehaviour
     {
-        audioSource = GetComponent<AudioSource>();
-    }
+        [SerializeField] private AudioSource audioSource;
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        private Ray shotRay;
+
+        private void OnValidate()
         {
-            audioSource.Play();
-            this.m_shotRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(this.m_shotRay, out RaycastHit hit, float.MaxValue))
+            if (this.audioSource == null)
+                this.audioSource = base.GetComponent<AudioSource>();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                Debug.Log(hit.collider.name);
-                if(hit.collider.tag == "Zombie")
+                this.audioSource.Play();
+
+                this.shotRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(this.shotRay, out RaycastHit hit, float.MaxValue))
                 {
-                    hit.collider.GetComponent<Enemy>().Death();
+                    Debug.Log(hit.collider.name);
+
+                    if (hit.collider.tag == "Zombie")
+                    {
+                        hit.collider.GetComponent<Enemy>().Death();
+                    }
                 }
             }
         }

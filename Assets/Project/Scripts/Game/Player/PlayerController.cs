@@ -5,12 +5,8 @@ using UnityEngine;
 namespace game
 {
     [RequireComponent(typeof(DOTweenPath))]
-    public class PlayerController : PlayerShooter
+    public class PlayerController : PlayerShooter, IPlayerController
     {
-        public static PlayerController Instance { get; private set; }
-
-        private float health = 100f;
-
         [Header("Components")]
         [SerializeField] private DOTweenPath tweenPath;
         [SerializeField] private Transform path;
@@ -33,29 +29,15 @@ namespace game
 
         private void Awake()
         {
-            base.Awake();
-            Instance = this;
             Destroy(this.path.gameObject);
         }
 
-        public void ToggleMovement(bool status)
+        public void ToggleMovement(bool enabled)
         {
-            if (status)
-                this.DOPlay();
+            if (enabled)
+                this.tweenPath.DOPlay();
             else
-                this.DOPause();
-        }
-
-        public void getAttacked(float damage)
-        {
-            health -= damage;
-
-            if (health <= 0f)
-                Die();
-        }
-        public void Die()
-        {
-            Debug.Log("Died!");
+                this.tweenPath.DOPause();
         }
     }
 }
