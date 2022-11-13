@@ -408,7 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyType: 0
-  attackDistance: 2
+  attackDistance: 1.5
   minDamage: 5
   maxDamage: 25
   animator: {fileID: 121187709183501755}
