@@ -20,8 +20,7 @@ namespace game
 
             Spawnable spawnPrefab = this.spawnables[Random.Range(0, this.spawnables.Length)];
             Spawnable spawn = Instantiate(spawnPrefab, spawnPos, Quaternion.identity);
-            Transform spawnTransform = spawn.transform;
-            spawnTransform.SetParent(base.transform.parent, true);
+            spawn.transform.SetParent(base.transform.parent, true);
 
             spawn.GetComponent<Enemy>()?.Setup(this.player);
 
