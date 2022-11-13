@@ -5,7 +5,7 @@ using UnityEngine;
 namespace game
 {
     [RequireComponent(typeof(DOTweenPath))]
-    public class PlayerController : PlayerShooter
+    public class PlayerController : PlayerShooter, IPlayerController
     {
         [Header("Components")]
         [SerializeField] private DOTweenPath tweenPath;
@@ -30,6 +30,14 @@ namespace game
         private void Awake()
         {
             Destroy(this.path.gameObject);
+        }
+
+        public void ToggleMovement(bool enabled)
+        {
+            if (enabled)
+                this.tweenPath.DOPlay();
+            else
+                this.tweenPath.DOPause();
         }
     }
 }
