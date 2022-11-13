@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,6 +21,7 @@ namespace game
         [SerializeField] private NavMeshAgent agent;
 
         private IPlayer player;
+        private Action onEnemyDeath;
 
         private void OnValidate()
         {
@@ -33,7 +35,7 @@ namespace game
         private void Awake()
         {
             this.agent.stoppingDistance = this.attackDistance;
-            this.animator.SetInteger(AnimationConstants.MOVE_VARIATION, Random.Range(0, 3));
+            this.animator.SetInteger(AnimationConstants.MOVE_VARIATION, UnityEngine.Random.Range(0, 3));
         }
 
         private void Update()
@@ -47,28 +49,29 @@ namespace game
                 Attack();
         }
 
-        public void Setup(IPlayer player)
+        public void Setup(IPlayer player, Action onEnemyDeath)
         {
             this.player = player;
+            this.onEnemyDeath = onEnemyDeath;
         }
 
         private void Attack()
         {
-            this.animator.SetInteger(AnimationConstants.ATTACK_VARIATION, Random.Range(0, 2));
+            this.animator.SetInteger(AnimationConstants.ATTACK_VARIATION, UnityEngine.Random.Range(0, 2));
             this.animator.SetTrigger(AnimationConstants.ATTACK_TRIGGER);
 
             this.player.OnPathBlocked();
-            this.player.OnGetAttacked(Random.Range(minDamage, maxDamage));
+            this.player.OnGetAttacked(UnityEngine.Random.Range(minDamage, maxDamage));
         }
 
         public void Death()
         {
-            this.animator.SetInteger(AnimationConstants.DEATH_VARIATION, Random.Range(0, 5));
+            this.animator.SetInteger(AnimationConstants.DEATH_VARIATION, UnityEngine.Random.Range(0, 5));
             this.animator.SetTrigger(AnimationConstants.DEATH_TRIGGER);
             this.GetComponent<Collider>().enabled = false;
 
-
             this.player.OnPathUnblocked();
+            this.onEnemyDeath.Invoke();
 
             this.agent.isStopped = true;
             this.enabled = false;
