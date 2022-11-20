@@ -11,12 +11,15 @@ namespace game
         [SerializeField] private DOTweenPath tweenPath;
         [SerializeField] private Transform path;
 
+#if UNITY_EDITOR
+        public Vector3[] Waypoints => this.tweenPath.wps.ToArray();
+#endif
         private void OnValidate()
         {
             if (this.tweenPath == null)
                 this.tweenPath = base.GetComponent<DOTweenPath>();
 
-            var pathWayPoints = new List<Vector3>();
+            var pathWayPoints = new List<Vector3> { base.transform.position };
             int totalWayPoints = this.path.childCount;
 
             for (int index = 0; index < totalWayPoints; index++)
